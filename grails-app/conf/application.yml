@@ -2,7 +2,7 @@
 grails:
     profile: web
     codegen:
-        defaultPackage: tp_grails
+        defaultPackage: fr.mbds.tpgrails
     spring:
         transactionManagement:
             proxies: false
@@ -11,6 +11,7 @@ grails:
             # Whether to translate GORM events into Reactor events
             # Disabled by default for performance reasons
             events: false
+
 info:
     app:
         name: '@info.app.name@'
