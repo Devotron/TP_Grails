@@ -1,7 +1,7 @@
 package fr.mbds.tpgrails
 
 class GrPOI {
-
+    // Groupe POI
     String nom
     List pois
 
