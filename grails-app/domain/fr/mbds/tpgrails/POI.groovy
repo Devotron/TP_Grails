@@ -13,9 +13,9 @@ class POI {
     Date lastUpdated
 
 
-    static hasMany = [images: Illustration]
+    static hasMany = [images: Illustration, grPOI: GrPOI]
 
-    static belongsTo = [grpoi: GrPOI]
+    static belongsTo = GrPOI
 
     static constraints = {
     }
