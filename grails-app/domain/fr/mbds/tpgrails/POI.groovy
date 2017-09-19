@@ -13,12 +13,16 @@ class POI {
     Date lastUpdated
 
 
-    static hasMany = [images: Illustration]
+    static hasMany = [images: Illustration, grpois: GrPOI]
 
-    static belongsTo = [grpoi: GrPOI]
+    static belongsTo = GrPOI
+
+    //static mappedBy = [images: 'poi']
 
     static constraints = {
     }
+
+
 
     static mapping = {
         images cascade: 'all-delete-orphan'

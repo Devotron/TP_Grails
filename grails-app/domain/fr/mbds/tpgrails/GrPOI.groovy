@@ -10,7 +10,10 @@ class GrPOI {
 
     static hasMany = [images: Illustration, pois: POI]
 
+    //static mappedBy = [images: 'grpoi', pois: 'grpoi']
+
     static constraints = {
+        pois nullable: true
     }
 
     static mapping = {
