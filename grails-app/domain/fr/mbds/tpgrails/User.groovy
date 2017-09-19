@@ -20,6 +20,7 @@ class User implements Serializable {
 
     Date dateCreated
     Date lastUpdated
+    
     Date dateNai
     String nom
     String prenom
