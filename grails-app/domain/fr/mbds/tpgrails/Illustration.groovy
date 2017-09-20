@@ -11,5 +11,7 @@ class Illustration {
     static belongsTo = [poi: POI, grpoi: GrPOI]
 
     static constraints = {
+        grpoi nullable: true
+        poi nullable:  true
     }
 }
