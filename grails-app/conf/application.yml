@@ -99,6 +99,9 @@ dataSource:
     username: sa
     password: ''
 
+server:
+  contextPath: "/TPGrails"
+
 environments:
     development:
         dataSource:
