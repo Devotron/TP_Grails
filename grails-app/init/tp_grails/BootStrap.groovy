@@ -19,6 +19,9 @@ class BootStrap {
             def moderateur = new User(username: "modo", password: "passm", nom: "Dorian", prenom: "Gray",dateNai: new Date(1995, 12, 12)).save(flush: true, failOnError: true)
             def administrateur = new User(username: "admin", password: "passa", nom: "Shwarz", prenom: "Arnold", dateNai: new Date(1980, 10, 12)).save(flush: true, failOnError: true)
 
+            //<f:table collection="${POIList}" properties="['id', 'nom','desc', 'geopos', 'auteur']"/>
+            //<f:table collection="${illustrationList}" properties="['id', 'nom', 'src']"/>
+            //<f:table collection="${grPOIList}" properties="['id', 'nom']" />
             UserRole.create(utilisateur, roleUtilisateur, true)
             UserRole.create(utilisateur2, roleUtilisateur, true)
             UserRole.create(moderateur, roleModerateur, true)
