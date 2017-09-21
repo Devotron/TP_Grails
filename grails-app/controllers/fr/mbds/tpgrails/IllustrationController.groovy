@@ -8,6 +8,8 @@ class IllustrationController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    static Boolean linkMe = false
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Illustration.list(params), model:[illustrationCount: Illustration.count()]
