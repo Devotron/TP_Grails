@@ -8,6 +8,8 @@ class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    static Boolean linkMe = true
+
     def springSecurityService
 
     def index(Integer max) {
