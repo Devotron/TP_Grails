@@ -10,6 +10,10 @@ class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    static Boolean linkMe = true
+
+    def springSecurityService
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         //respond User.list(params), model:[userCount: User.count()]
@@ -75,7 +79,7 @@ class UserController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
+                redirect(mapping : "userProfile", id: springSecurityService.principal.id)
             }
             '*'{ respond user, [status: OK] }
         }

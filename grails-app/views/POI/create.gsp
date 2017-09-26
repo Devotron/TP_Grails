@@ -6,6 +6,7 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
+    <g:render template="../navbar" model="[navbar: myNavBar]" />
         <a href="#create-POI" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
         <div class="nav" role="navigation">
             <ul>
@@ -29,6 +30,7 @@
                 <fieldset class="form">
                     <f:all bean="POI"/>
                 </fieldset>
+                <g:render template="/illustration/createWithDragAndDrop" model="[createillustration: createIllustration]" />
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>
