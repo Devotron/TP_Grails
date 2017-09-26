@@ -6,15 +6,21 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class UserController {
 
+    def userService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond User.list(params), model:[userCount: User.count()]
+        //respond User.list(params), model:[userCount: User.count()]
+        //respond userService.listingUtilisateurs(), model:[userCount: userService.tailleListing()]
+        render view: 'index', model: [userList: userService.listingUtilisateurs(), userCount: userService.tailleListing()]
+
     }
 
     def show(User user) {
         respond user
+        userService.profilUtilisateur(user)
     }
 
     def create() {
