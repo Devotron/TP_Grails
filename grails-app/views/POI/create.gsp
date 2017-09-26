@@ -30,6 +30,7 @@
                 <fieldset class="form">
                     <f:all bean="POI"/>
                 </fieldset>
+                <g:render template="/illustration/createWithDragAndDrop" model="[createillustration: createIllustration]" />
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>
