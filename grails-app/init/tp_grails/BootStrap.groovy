@@ -38,7 +38,7 @@ class BootStrap {
 
                 for (int i = 0; i < 3; i++) {
                     // On crée le groupe et on garde une référence sur ce dernier
-                    def grouspe = new GrPOI(nom: "Groupe " + i).save(flush: true, failOnError: true)
+                    def groupe = new GrPOI(nom: "Groupe " + i).save(flush: true, failOnError: true)
 
                     for (int j = 0; j < 5; j++) {
                         // On crée un POI sans le persister et on garder une référence dessus
