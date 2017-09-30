@@ -30,13 +30,17 @@ class UserController {
     }
 
     def show(User user) {
+
         println("********************************")
         println("Show : (ID :{$user.id}, USERNAME : {$user.username}, ROLE : {$user.authorities.authority})")
         boolean permission = userService.verificationDroits(user)
 
+        // if user id = current user id
+
         if (permission) {
             println("Permission OK ${user.getAuthorities()[0].authority}")
             respond user
+
         } else {
             println("Permission KO ${user.getAuthorities()[0].authority}")
             flash.error = "Vous n'avez pas les permissions pour visualiser les informations de cet utilisateur"
@@ -87,16 +91,20 @@ class UserController {
         println("Edit : (ID :{$user.id}, USERNAME : {$user.username}, ROLE : {$user.authorities.authority})")
         boolean permission = userService.verificationDroits(user)
         println("Permission : {$permission}")
-        if ( permission ) {
+
+        /*if ( permission ) {
             println("Permission OK ${user.getAuthorities()[0].authority}")
+            println("User : (ID :{$user.id}")
             respond user
 
         } else {
+
             println("Permission KO ${user.getAuthorities()[0].authority}")
             flash.error = "Vous n'avez pas les permissions pour modifier cet utilisateur"
             redirect(action: index())
             return
-        }
+        }*/
+        respond user
     }
 
     @Transactional
@@ -104,12 +112,14 @@ class UserController {
         println("********************************")
         println("Update : (ID :{$user.id}, USERNAME : {$user.username}, ROLE : {$user.authorities.authority})")
         if (user == null) {
+            println("Update : user null")
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
 
         if (user.hasErrors()) {
+            println("Update : hasErrors")
             transactionStatus.setRollbackOnly()
             respond user.errors, view:'edit'
             return
@@ -120,7 +130,7 @@ class UserController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect(mapping : "userProfile", id: springSecurityService.principal.id)
+                redirect user
             }
             '*'{ respond user, [status: OK] }
         }

@@ -72,7 +72,7 @@ class UserService {
                 println("Compte d'un moderateur ou admin")
                 aLesDroits = false
             }
-        } else if ( springSecurityService.getPrincipal().getAt('authorities')[0].equals('ROLE_ADMIN') ) {
+        } else if ( springSecurityService.getPrincipal().getAt('authorities')[0].toString().equals('ROLE_ADMIN') ) {
             aLesDroits = true
         }
 
