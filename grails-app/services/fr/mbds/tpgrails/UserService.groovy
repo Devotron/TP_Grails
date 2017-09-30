@@ -80,5 +80,19 @@ class UserService {
 
     }
 
+    def verificationTypeMAJ(User user) {
+        def IDcourant = springSecurityService.currentUserId
+        println("Utilisateur courant {$IDcourant}")
+
+        boolean estProfil = false
+
+        if ( IDcourant == user.id ) {
+            estProfil = true
+        }
+
+        println(estProfil)
+        return estProfil
+
+    }
 
 }

@@ -18,6 +18,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
 		[pattern: '/poi/show/**',   access: ['isFullyAuthenticated()']],
 		[pattern: '/poi/**',   access: ['ROLE_ADMIN', 'ROLE_MODERATEUR']],
 		[pattern: '/user/profil/**',   access: ['isFullyAuthenticated()']],
+		[pattern: '/user/update/**',   access: ['isFullyAuthenticated()']],
 		[pattern: '/user/delete/**',   access: ['ROLE_ADMIN']],
 		[pattern: '/user/create/**',   access: ['ROLE_ADMIN']],
 		[pattern: '/user/**',   access: ['ROLE_ADMIN', 'ROLE_MODERATEUR']],

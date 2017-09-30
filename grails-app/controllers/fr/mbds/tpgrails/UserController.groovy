@@ -21,7 +21,6 @@ class UserController {
 
     def springSecurityService
 
-    //@Secured(value=["ROLE_ADMIN", "ROLE_MODERATEUR"], httpMethod='GET')
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         //respond User.list(params), model:[userCount: User.count()]
@@ -52,7 +51,6 @@ class UserController {
     }
 
 
-    //@Secured(value=["ROLE_ADMIN"], httpMethod='POST')
     def create() {
         println("********************************")
         println("Create : ")
@@ -92,7 +90,7 @@ class UserController {
         boolean permission = userService.verificationDroits(user)
         println("Permission : {$permission}")
 
-        /*if ( permission ) {
+        if ( permission ) {
             println("Permission OK ${user.getAuthorities()[0].authority}")
             println("User : (ID :{$user.id}")
             respond user
@@ -103,7 +101,7 @@ class UserController {
             flash.error = "Vous n'avez pas les permissions pour modifier cet utilisateur"
             redirect(action: index())
             return
-        }*/
+        }
         respond user
     }
 
@@ -111,6 +109,7 @@ class UserController {
     def update(User user) {
         println("********************************")
         println("Update : (ID :{$user.id}, USERNAME : {$user.username}, ROLE : {$user.authorities.authority})")
+
         if (user == null) {
             println("Update : user null")
             transactionStatus.setRollbackOnly()
@@ -127,13 +126,26 @@ class UserController {
 
         user.save flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
+        // Mise à jour d'un profil
+        if ( userService.verificationTypeMAJ(user) ) {
+            println("MAJ Profil")
+            flash.message = "Modification du profil enregistrée"
+            //redirect(action: profil(), params:[status: OK, user: user])
+            redirect(url: "/user/profil")
+            //forward action: "profil"
+            return
+
+        } else {
+            println("Autre MAJ")
+            request.withFormat {
+                form multipartForm {
+                    flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
+                    redirect user
+                }
+                '*'{ respond user, [status: OK] }
             }
-            '*'{ respond user, [status: OK] }
         }
+
     }
 
     @Transactional
@@ -161,7 +173,10 @@ class UserController {
         println("********************************")
         println("Profil : ")
         User utilisateurCourant = userService.profilUtilisateur()
-        render view: 'profil', model: [user: utilisateurCourant, ]
+        String roleU = UserRole.findByUser(utilisateurCourant).getRole().getAuthority()
+        println(roleU)
+
+        render view: 'profil', model:[user: utilisateurCourant, profil: roleU]
     }
 
 
