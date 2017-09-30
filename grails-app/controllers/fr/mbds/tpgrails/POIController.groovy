@@ -13,6 +13,8 @@ class POIController {
 
     static Boolean linkMe = true
 
+    def illustrationService
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond POI.list(params), model: [POICount: POI.count()]
@@ -33,24 +35,14 @@ class POIController {
             MultipartHttpServletRequest mpr = (MultipartHttpServletRequest) request;
             MultipartFile file = (MultipartFile) mpr.getFile("file");
 
-            if (file.empty) {
-                transactionStatus.setRollbackOnly()
-                notFound()
-                return
+            def filename = illustrationService.tryUpload(file)
+
+            if(filename != null) {
+                illustrationService.saveIllustration(filename, poi)
             }
-
-            // initialisation
-            def illustration = new Illustration()
-            illustration.nom = file.originalFilename
-            illustration.poi = poi
-
-            // enregistrer l'illustration sur le serveur web de stockage de fichiers
-            def cheminFichier = grailsApplication.config.uploadFolder + illustration.nom
-            file.transferTo(new File(cheminFichier))
-
-            // sauvegarder les objets
-            poi.addToImages(illustration)
-            poi.save flush: true
+            else {
+                poi.save flush: true
+            }
         }
         forward(action: "show", id: poi.id)
     }
