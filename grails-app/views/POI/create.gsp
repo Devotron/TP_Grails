@@ -26,13 +26,19 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.POI}" method="POST">
+            <g:form resource="${this.POI}"  enctype="multipart/form-data"  method="POST">
                 <fieldset class="form">
-                    <f:all bean="POI"/>
+                    <f:with bean="POI">
+                        <f:field property="nom"></f:field>
+                        <f:field property="desc"></f:field>
+                        <f:field property="auteur"></f:field>
+                        <f:field property="geopos"></f:field>
+                    </f:with>
+                    <label>Image du POI</label>
+                    <input type="file" name="file" />
                 </fieldset>
-                <g:render template="/illustration/createWithDragAndDrop" model="[createillustration: createIllustration]" />
                 <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+                    <g:actionSubmit name="create" action="upload" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>
             </g:form>
         </div>

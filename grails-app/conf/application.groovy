@@ -34,3 +34,14 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 	[pattern: '/**',             filters: 'JOINED_FILTERS']
 ]
 
+environments {
+	development {
+		uploadFolder = "/srv/http/uploads/"
+	}
+	test {
+		uploadFolder = "/srv/http/uploads/"
+	}
+	production {
+		uploadFolder = "/srv/http/uploads/"
+	}
+}
