@@ -110,6 +110,10 @@ class POIController {
             return
         }
 
+        // supprime le POI des associations avec les groupes de POI
+        def grpois = POI.grpois
+        grpois*.removeFromPois(POI)
+
         POI.delete flush: true
 
         request.withFormat {
