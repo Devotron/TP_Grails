@@ -1,3 +1,4 @@
+<%@ page import="fr.mbds.tpgrails.Illustration" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,8 +32,9 @@
                     <f:with bean="POI">
                         <f:field property="nom"></f:field>
                         <f:field property="desc"></f:field>
-                        <f:field property="auteur"></f:field>
                         <f:field property="geopos"></f:field>
+                        <f:field property="grpois"></f:field>
+                        <f:field property="auteur"></f:field>
                     </f:with>
                     <label>Image du POI</label>
                     <input type="file" name="file" />
