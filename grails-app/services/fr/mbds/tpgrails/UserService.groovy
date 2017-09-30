@@ -10,10 +10,12 @@ class UserService {
 
     def springSecurityService
 
-    def profilUtilisateur(User user) {
-        return User.get(springSecurityService.getAuthentication())
+    //Récupération du profil client
+    def profilUtilisateur() {
+        return User.findById(springSecurityService.getCurrentUserId())
     }
 
+    //Listing des utilisateurs, dépendemment des droits
     def listingUtilisateurs() {
 
         def listing
@@ -35,6 +37,7 @@ class UserService {
        return listing
     }
 
+    //Taille du listing
     def tailleListing() {
 
         def taille
