@@ -27,13 +27,21 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.POI}" method="PUT">
+            <g:form resource="${this.POI}"  enctype="multipart/form-data" method="POST">
                 <g:hiddenField name="version" value="${this.POI?.version}" />
                 <fieldset class="form">
-                    <f:all bean="POI"/>
+                    <f:with bean="POI">
+                        <f:field property="nom"></f:field>
+                        <f:field property="desc"></f:field>
+                        <f:field property="geopos"></f:field>
+                        <f:field property="grpois"></f:field>
+                        <f:field property="auteur"></f:field>
+                        <f:field property="images"></f:field>
+                    </f:with>
+                    <input type="file" name="file" />
                 </fieldset>
                 <fieldset class="buttons">
-                    <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <g:actionSubmit action="updateCustom"  class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>
             </g:form>
         </div>

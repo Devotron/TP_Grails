@@ -31,19 +31,8 @@ class POIController {
     def upload() {
         def poi = new POI(params)
 
-        if (request instanceof MultipartHttpServletRequest) {
-            MultipartHttpServletRequest mpr = (MultipartHttpServletRequest) request;
-            MultipartFile file = (MultipartFile) mpr.getFile("file");
+    tryRequest(poi)
 
-            def filename = illustrationService.tryUpload(file)
-
-            if(filename != null) {
-                illustrationService.saveIllustration(filename, poi)
-            }
-            else {
-                poi.save flush: true
-            }
-        }
         forward(action: "show", id: poi.id)
     }
 
@@ -101,6 +90,47 @@ class POIController {
         }
     }
 
+    def updateCustom(POI POI) {
+
+        if (POI == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (POI.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            respond POI.errors, view: 'edit'
+            return
+        }
+
+        tryRequest(POI)
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'POI.label', default: 'POI'), POI.id])
+                redirect POI
+            }
+            '*' { respond POI, [status: OK] }
+        }
+    }
+
+    def private tryRequest(POI poi) {
+        if (request instanceof MultipartHttpServletRequest) {
+            MultipartHttpServletRequest mpr = (MultipartHttpServletRequest) request;
+            MultipartFile file = (MultipartFile) mpr.getFile("file");
+
+            def filename = illustrationService.tryUpload(file)
+
+            if(filename != null) {
+                illustrationService.saveIllustration(filename, poi)
+            }
+            else {
+                poi.save flush: true
+            }
+        }
+    }
+
     @Transactional
     def delete(POI POI) {
 
@@ -109,6 +139,10 @@ class POIController {
             notFound()
             return
         }
+
+        // supprime le POI des associations avec les groupes de POI
+        def grpois = POI.grpois
+        grpois*.removeFromPois(POI)
 
         POI.delete flush: true
 
