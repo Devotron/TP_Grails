@@ -9,6 +9,7 @@ class GrPOIController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     static Boolean linkMe = true
+    static String joliNom = "Groupes de POI"
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
