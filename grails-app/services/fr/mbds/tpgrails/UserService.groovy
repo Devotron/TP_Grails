@@ -54,5 +54,31 @@ class UserService {
         return taille
     }
 
+    // Vérification des droits pour les cas du edit/update et delete
+    def verificationDroits(User user) {
+
+        boolean aLesDroits = false
+
+        if ( springSecurityService.getPrincipal().getAt('authorities')[0].toString().equals('ROLE_MODERATEUR') ) {
+            // MODERATEUR :
+            Role porteeModo = Role.findByAuthority('ROLE_UTILISATEUR')
+
+            println("Type d'utilisateur : ${user.getAuthorities()[0].authority}")
+
+            if ( user.getAuthorities().contains(porteeModo) ) {
+                println("Compte d'un utilisateur")
+                aLesDroits = true
+            } else {
+                println("Compte d'un moderateur ou admin")
+                aLesDroits = false
+            }
+        } else if ( springSecurityService.getPrincipal().getAt('authorities')[0].equals('ROLE_ADMIN') ) {
+            aLesDroits = true
+        }
+
+        return aLesDroits
+
+    }
+
 
 }

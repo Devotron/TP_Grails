@@ -23,7 +23,6 @@ class UserController {
 
     //@Secured(value=["ROLE_ADMIN", "ROLE_MODERATEUR"], httpMethod='GET')
     def index(Integer max) {
-        println("HI")
         params.max = Math.min(max ?: 10, 100)
         //respond User.list(params), model:[userCount: User.count()]
         //respond userService.listingUtilisateurs(), model:[userCount: userService.tailleListing()]
@@ -31,17 +30,35 @@ class UserController {
     }
 
     def show(User user) {
-        respond user
+        println("********************************")
+        println("Show : (ID :{$user.id}, USERNAME : {$user.username}, ROLE : {$user.authorities.authority})")
+        boolean permission = userService.verificationDroits(user)
+
+        if (permission) {
+            println("Permission OK ${user.getAuthorities()[0].authority}")
+            respond user
+        } else {
+            println("Permission KO ${user.getAuthorities()[0].authority}")
+            flash.error = "Vous n'avez pas les permissions pour visualiser les informations de cet utilisateur"
+            redirect(action:index())
+            return
+        }
+
+
     }
 
 
     //@Secured(value=["ROLE_ADMIN"], httpMethod='POST')
     def create() {
+        println("********************************")
+        println("Create : ")
         respond new User(params)
     }
 
     @Transactional
     def save(User user) {
+        println("********************************")
+        println("Save : (ID :{$user.id}, USERNAME : {$user.username}, ROLE : {$user.authorities.authority})")
         if (user == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -66,12 +83,26 @@ class UserController {
     }
 
     def edit(User user) {
-        respond user
+        println("********************************")
+        println("Edit : (ID :{$user.id}, USERNAME : {$user.username}, ROLE : {$user.authorities.authority})")
+        boolean permission = userService.verificationDroits(user)
+        println("Permission : {$permission}")
+        if ( permission ) {
+            println("Permission OK ${user.getAuthorities()[0].authority}")
+            respond user
+
+        } else {
+            println("Permission KO ${user.getAuthorities()[0].authority}")
+            flash.error = "Vous n'avez pas les permissions pour modifier cet utilisateur"
+            redirect(action: index())
+            return
+        }
     }
 
     @Transactional
     def update(User user) {
-        println("Update : {$user}")
+        println("********************************")
+        println("Update : (ID :{$user.id}, USERNAME : {$user.username}, ROLE : {$user.authorities.authority})")
         if (user == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -97,7 +128,8 @@ class UserController {
 
     @Transactional
     def delete(User user) {
-
+        println("********************************")
+        println("Delete : {$user}")
         if (user == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -116,6 +148,8 @@ class UserController {
     }
 
     def profil() {
+        println("********************************")
+        println("Profil : ")
         User utilisateurCourant = userService.profilUtilisateur()
         render view: 'profil', model: [user: utilisateurCourant, ]
     }
