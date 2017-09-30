@@ -42,7 +42,6 @@ class BootStrap {
 
                     for (int j = 0; j < 5; j++) {
                         // On crée un POI sans le persister et on garder une référence dessus
-                        //def poi = new POI(nom: "POI " + j, desc: "POI " + j, auteur: utilisateur, dateCreated: new Date().format('yyyyMMdd'), lastUpdated: new Date().format('yyyyMMdd'), geopos: new GeoLoc(latitude: 17.12, longitude: 7.14))
                         def poi = new POI(nom: "POI " + j, desc: "POI " + j, auteur: utilisateur, geopos: new GeoLoc(latitude: 17.12, longitude: 7.14))
 
                         // Puis on ajoute le POI précédemment créé dans le groupe
