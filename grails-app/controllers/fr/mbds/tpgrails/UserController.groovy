@@ -1,5 +1,7 @@
 package fr.mbds.tpgrails
 
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -8,25 +10,32 @@ class UserController {
 
     def userService
 
+    // TODO : secure sur les actions non autorisées
+    // TODO : Modifier l'ihm + secure taglib
+    // TODO : password encodage
+    // DONE : logout
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     static Boolean linkMe = true
 
     def springSecurityService
 
+    //@Secured(value=["ROLE_ADMIN", "ROLE_MODERATEUR"], httpMethod='GET')
     def index(Integer max) {
+        println("HI")
         params.max = Math.min(max ?: 10, 100)
         //respond User.list(params), model:[userCount: User.count()]
         //respond userService.listingUtilisateurs(), model:[userCount: userService.tailleListing()]
         render view: 'index', model: [userList: userService.listingUtilisateurs(), userCount: userService.tailleListing()]
-
     }
 
     def show(User user) {
         respond user
-        userService.profilUtilisateur(user)
     }
 
+
+    //@Secured(value=["ROLE_ADMIN"], httpMethod='POST')
     def create() {
         respond new User(params)
     }
@@ -62,6 +71,7 @@ class UserController {
 
     @Transactional
     def update(User user) {
+        println("Update : {$user}")
         if (user == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -104,6 +114,12 @@ class UserController {
             '*'{ render status: NO_CONTENT }
         }
     }
+
+    def profil() {
+        User utilisateurCourant = userService.profilUtilisateur()
+        render view: 'profil', model: [user: utilisateurCourant, ]
+    }
+
 
     protected void notFound() {
         request.withFormat {
