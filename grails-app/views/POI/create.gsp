@@ -29,15 +29,7 @@
             </g:hasErrors>
             <g:form resource="${this.POI}"  enctype="multipart/form-data"  method="POST">
                 <fieldset class="form">
-                    <f:with bean="POI">
-                        <f:field property="nom"></f:field>
-                        <f:field property="desc"></f:field>
-                        <f:field property="geopos"></f:field>
-                        <f:field property="grpois"></f:field>
-                        <f:field property="auteur"></f:field>
-                    </f:with>
-                    <label>Image du POI</label>
-                    <input type="file" name="file" />
+                    <g:render template="champsPOI" model="[champs: champs]" />
                 </fieldset>
                 <fieldset class="buttons">
                     <g:actionSubmit name="create" action="upload" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

@@ -12,6 +12,7 @@ class POIController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     static Boolean linkMe = true
+    static String joliNom = "Points d'interêt"
 
     def illustrationService
 

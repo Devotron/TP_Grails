@@ -18,6 +18,7 @@ class UserController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     static Boolean linkMe = true
+    static String joliNom = "Utilisateurs"
 
     def springSecurityService
 
