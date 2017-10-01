@@ -22,7 +22,8 @@ class POIController {
     }
 
     def show(POI POI) {
-        respond POI
+
+        respond POI, model: [POIGeopos: POI.geopos]
     }
 
     def create() {

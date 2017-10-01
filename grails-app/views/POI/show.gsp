@@ -22,7 +22,11 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
+
             <f:display bean="POI" />
+
+            <g:render template="map"/>
+
             <g:render template="illustrations" model="[files: files]" />
             <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_MODERATEUR">
             <g:form resource="${this.POI}" method="DELETE">
