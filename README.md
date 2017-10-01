@@ -14,12 +14,14 @@ Comptes :
 ## Fonctionnalités implémentées
 
 * Gestion des utilisateurs :
-  - Acces au fonctionnalité du site dépendamment des droits utilisateurs
+  - Accès au fonctionnalité du site dépendamment des droits utilisateurs
   - Modérateur peut modifier certaines informations des utilisateurs simples
   - Admin peut modifier/créer des utilisateurs
    
 * Profil utilisateur : 
   Un utilisateur a accès à une page de profil sur laquelle il peut effectuer des modifications
+  
+* Création et édition de POIs et groupe de POIs 
   
 * Upload et affichage des images :
   Pour les POIs
