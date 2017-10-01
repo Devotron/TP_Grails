@@ -32,6 +32,7 @@
                 <fieldset class="form">
                     <g:render template="champsPOI" model="[champs: champs]" />
                 </fieldset>
+                <g:render template="illustrations" model="[files: files]" />
                 <fieldset class="buttons">
                     <g:actionSubmit action="updateCustom"  class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>

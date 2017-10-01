@@ -13,5 +13,6 @@ class Illustration {
     static constraints = {
         grpoi nullable: true
         poi nullable:  true
+        src nullable: true
     }
 }
