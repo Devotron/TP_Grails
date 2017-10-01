@@ -41,12 +41,13 @@ class BootStrap {
                     // On crée le groupe et on garde une référence sur ce dernier
                     def groupe = new GrPOI(nom: "Groupe " + i).save(flush: true, failOnError: true)
 
+                    Set<Illustration> illustrations = [new Illustration(nom: "placeholder140x110.png"), new Illustration(nom: "placeholder200x200.png")]
+
                     for (int j = 0; j < 5; j++) {
                         // On crée un POI sans le persister et on garder une référence
                         def poi = new POI(nom: "POI " + j, desc: "POI " + j, auteur: utilisateur, geopos: new GeoLoc(latitude: 17.12, longitude: 7.14))
 
                         // On ajoute des illustrations au POI
-                        Set<Illustration> illustrations = [new Illustration(nom: "placeholder140x110.png"), new Illustration(nom: "placeholder200x200.png")]
                         illustrations.each {
                             poi.addToImages(it)
                         }
@@ -59,6 +60,8 @@ class BootStrap {
 
                     def illustration = new Illustration(nom: "placeholder2430x970.png")
                     groupe.addToImages(illustration)
+                    groupe.addToImages(illustrations.first())
+                    groupe.save(flush: true, failOnError: true)
                 }
             }
         }
