@@ -99,11 +99,14 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 environments {
 	development {
 		uploadFolder = "/srv/http/uploads/"
+		fileServerUrl = "http://localhost/uploads/"
 	}
 	test {
 		uploadFolder = "/srv/http/uploads/"
+		fileServerUrl = "http://localhost/uploads/"
 	}
 	production {
 		uploadFolder = "/srv/http/uploads/"
+		fileServerUrl = "http://localhost/uploads/"
 	}
 }
