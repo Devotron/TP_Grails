@@ -23,9 +23,7 @@
             <div class="message" role="status">${flash.message}</div>
             </g:if>
             <f:display bean="grPOI" />
-            <g:each in="${this.grPOI.images}" id="files">
-                <img src="${grailsApplication.config.fileServerUrl + it.nom}" />
-            </g:each>
+            <g:render template="illustrations" />
             <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_MODERATEUR">
             <g:form resource="${this.grPOI}" method="DELETE">
                 <fieldset class="buttons">
