@@ -1,10 +1,13 @@
-# Projet POI Grails
+# Projet POI Grails :
+### Plateforme  de gestion de points d’intérêts
 
 Projet réalisé par Michaël Gianfaldone et Estelle Rostan dans le cadre de l'enseignement "Serveur Grails" du master 2 MBDS.
 
 ## Informations
 
-Base de donnée : H2 Database
+- Base de donnée : H2 Database
+- Serveur web Apache pour le stockage des images
+
 
 Comptes :
 - Utilisateur simple : user@unice.fr, pass
