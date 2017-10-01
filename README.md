@@ -26,7 +26,7 @@ Comptes :
 * Gestion des utilisateurs :
   - Accès aus fonctionnalités du site dépendamment des droits utilisateurs
   - Modérateur peut modifier certaines informations des utilisateurs simples
-  - Admin peut modifier/ créer des utilisateurs
+  - Admin peut modifier/créer/supprimer des utilisateurs
    
 * Profil utilisateur : 
   Un utilisateur a accès à une page de profil sur laquelle il peut effectuer des modifications
