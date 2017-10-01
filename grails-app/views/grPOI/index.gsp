@@ -21,8 +21,7 @@
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${grPOIList}" properties="['id', 'nom']" />
-
+            <g:render template="table" model="[table: table]"/>
             <div class="pagination">
                 <g:paginate total="${grPOICount ?: 0}" />
             </div>
