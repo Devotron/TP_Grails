@@ -23,12 +23,18 @@
             <p>
                 Ci-dessous, vous pourrez retrouvez les fonctionnalité implementées.
                 Toute fonctionnalité partiellement implementé sera précisé avec leur état d'avancement.
+                <hr>
                 <ul class="accordion">
-                    <li>Securisation des accès au fonctionnalité du site :
-                    (InterceptURL + secure taglib + verification des permissions
-                    lors des appels d'action controlleur)</li>
-                </ul>
+                    <li>Accès aus fonctionnalités du site dépendamment des droits utilisateurs
+                    Modérateur peut modifier certaines informations des utilisateurs simples</li>
+                    <li>Admin peut modifier/créer/supprimer des utilisateurs</li>
+                    <li>Profil utilisateur : Un utilisateur a accès à une page de profil sur laquelle il peut effectuer des modifications
+                    </li>
+                    <li>Création et édition de POIs et groupe de POIs où tous les attributs de ces derniers sont modifiables</li>
+                    <li>Upload et affichage des images pour les POIs et les groupes de POIs</li>
+                    <li>Stockage des images uploadées via les différents formulaires dans un serveur web Apache configuré dans le fichier application.groovy</li>
 
+                </ul>
 
             </p>
 

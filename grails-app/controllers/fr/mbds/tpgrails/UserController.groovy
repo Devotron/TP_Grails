@@ -166,6 +166,8 @@ class UserController {
             return
         }
 
+        UserRole.findByUser(user).delete()
+
         user.delete flush:true
 
         request.withFormat {

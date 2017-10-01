@@ -8,6 +8,9 @@
                 </li>
             </g:if>
         </g:each>
+        <li class="controller">
+            <g:link controller="user" action="profil"><g:message code="default.profil.label"/></g:link></li>
+        </li>
         <li class="controller"><g:link controller='logout'><strong><g:message code="default.logout.label" /></strong></g:link></li>
     </ul>
 </content>
