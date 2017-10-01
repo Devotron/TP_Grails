@@ -19,6 +19,8 @@ class UserService {
     def listingUtilisateurs() {
 
         def listing
+
+
         println("[UserService] listingUtilisateurs")
         if ( springSecurityService.getAuthentication().getAuthorities().toArray().getAt(0).toString().equals('ROLE_ADMIN') ) {
             println("[UserService] Droit admin")
@@ -30,7 +32,9 @@ class UserService {
 
             Role porteeModo = Role.findByAuthority('ROLE_UTILISATEUR')
 
-            listing = UserRole.findAllByRole(porteeModo)
+            listing = UserRole.findAllByRole(porteeModo).user
+
+            println(listing.class.getTypeName())
 
         }
 
@@ -93,6 +97,28 @@ class UserService {
         println(estProfil)
         return estProfil
 
+    }
+
+    def loginUnique(User user) {
+
+        def login = user.username
+
+        User u = User.findByUsername(login)
+
+        boolean estUnique = false
+
+        if ( u.id == springSecurityService.getCurrentUserId() ) {
+            println("Login appartient au même utilisateur")
+            estUnique = true
+        }
+
+        return estUnique
+
+    }
+
+    def roleUtilisateur(User user) {
+
+        return UserRole.findByUser(user).getRole().getAuthority()
     }
 
 }

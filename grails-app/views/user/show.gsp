@@ -3,7 +3,7 @@
     <head>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-        <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <title>Détail utilisateur</title>
     </head>
     <body>
     <g:render template="../navbar" model="[navbar: myNavBar]" />
@@ -18,12 +18,40 @@
             </ul>
         </div>
         <div id="show-user" class="content scaffold-show" role="main">
-            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+            <h1>Détail utilisateur</h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
 
-            <f:display bean="user" />
+            <f:with bean="user">
+                <f:field property="nom">
+                    <f:display property="nom" ></f:display>
+                </f:field>
+                <f:field property="prenom">
+                    <f:display property="prenom"></f:display>
+                </f:field>
+                <f:field property="username" label="Login">
+                    <f:display property="username" ></f:display>
+                </f:field>
+                <f:field property="password" label="Mot de passe" >
+                    <f:display property="password"></f:display>
+                </f:field>
+                <f:field property="accountExpired" label="Compte expiré">
+                    <g:checkBox name="accountExpired" checked="${user.accountExpired}" disabled=""></g:checkBox>
+                </f:field>
+                <f:field property="accountLocked" label="Compte cloturé" >
+                    <g:checkBox name="accountLocked" checked="${user.accountLocked}" disabled=""></g:checkBox>
+                </f:field>
+                <sec:ifAnyGranted roles="ROLE_ADMIN">
+                    <f:field property="passwordExpired" label="Mot de passe expiré" >
+                        <g:checkBox name="passwordExpired" checked="${user.passwordExpired}" disabled=""></g:checkBox>
+                    </f:field>
+                    <f:field property="enabled" label="Compte activé" >
+                        <g:checkBox name="enabled" checked="${user.enabled}" disabled=""></g:checkBox>
+                    </f:field>
+                </sec:ifAnyGranted>
+
+            </f:with>
 
                 <g:form resource="${this.user}" method="DELETE">
                     <fieldset class="buttons">

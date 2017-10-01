@@ -10,11 +10,6 @@ class UserController {
 
     def userService
 
-    // TODO : secure sur les actions non autorisées
-    // TODO : Modifier l'ihm + secure taglib
-    // TODO : password encodage
-    // DONE : logout
-
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     static Boolean linkMe = true
@@ -26,6 +21,9 @@ class UserController {
         params.max = Math.min(max ?: 10, 100)
         //respond User.list(params), model:[userCount: User.count()]
         //respond userService.listingUtilisateurs(), model:[userCount: userService.tailleListing()]
+        println(User.getAll().class.getTypeName())
+        println(userService.listingUtilisateurs())
+
         render view: 'index', model: [userList: userService.listingUtilisateurs(), userCount: userService.tailleListing()]
     }
 
@@ -35,11 +33,11 @@ class UserController {
         println("Show : (ID :{$user.id}, USERNAME : {$user.username}, ROLE : {$user.authorities.authority})")
         boolean permission = userService.verificationDroits(user)
 
-        // if user id = current user id
+        String roleU = userService.roleUtilisateur(user)
 
         if (permission) {
             println("Permission OK ${user.getAuthorities()[0].authority}")
-            respond user
+            respond user, model: [role: roleU]
 
         } else {
             println("Permission KO ${user.getAuthorities()[0].authority}")
@@ -110,6 +108,7 @@ class UserController {
     def update(User user) {
         println("********************************")
         println("Update : (ID :{$user.id}, USERNAME : {$user.username}, ROLE : {$user.authorities.authority})")
+
 
         if (user == null) {
             println("Update : user null")

@@ -21,10 +21,10 @@ class BootStrap {
             def roleModerateur = new Role(authority: 'ROLE_MODERATEUR').save(flush: true, failOnError: true)
             def roleUtilisateur = new Role(authority: 'ROLE_UTILISATEUR').save(flush: true, failOnError: true)
             // Création de compte utilisateurs par défaut
-            def utilisateur = new User(username: "user", password: "pass", nom: "Wyatt", prenom: "Trevor", dateNai: Date.parse("yyyy-MM-dd", "1985-04-03")).save(flush: true, failOnError: true)
+            def utilisateur = new User(username: "user@unice.fr", password: "pass", nom: "Wyatt", prenom: "Trevor", dateNai: Date.parse("yyyy-MM-dd", "1985-04-03")).save(flush: true, failOnError: true)
             def utilisateur2 = new User(username: "doe@unice.fr", password: "pass", nom: "Doe", prenom: "John", dateNai: Date.parse("yyyy-MM-dd", "1960-08-15")).save(flush: true, failOnError: true)
-            def moderateur = new User(username: "modo", password: "passm", nom: "Dorian", prenom: "Gray", dateNai: Date.parse("yyyy-MM-dd", "1995-12-12")).save(flush: true, failOnError: true)
-            def administrateur = new User(username: "admin", password: "passa", nom: "Shwarz", prenom: "Arnold", dateNai: Date.parse("yyyy-MM-dd", "1980-10-12")).save(flush: true, failOnError: true)
+            def moderateur = new User(username: "modo@unice.fr", password: "passm", nom: "Dorian", prenom: "Gray", dateNai: Date.parse("yyyy-MM-dd", "1995-12-12")).save(flush: true, failOnError: true)
+            def administrateur = new User(username: "admin@unice.fr", password: "passa", nom: "Shwarz", prenom: "Arnold", dateNai: Date.parse("yyyy-MM-dd", "1980-10-12")).save(flush: true, failOnError: true)
 
             //  On sauvegarde les utilisateurs et leurs rôles
             //<f:table collection="${POIList}" properties="['id', 'nom','desc', 'geopos', 'auteur']"/>

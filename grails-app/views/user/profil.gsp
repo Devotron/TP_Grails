@@ -3,7 +3,7 @@
 <head>
     <meta name="layout" content="main" />
     <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-    <title><g:message code="default.edit.label" args="[entityName]" /></title>
+    <title>Edition de profil</title>
 </head>
 <body>
 <g:render template="../navbar" model="[navbar: myNavBar]" />
@@ -14,7 +14,7 @@
     </ul>
 </div>
 <div id="edit-profil" class="content scaffold-edit" role="main">
-    <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
+    <h1>Editer votre profil</h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -36,15 +36,19 @@
             <f:field property="prenom">
                 <g:field type="text" name="prenom" value="${user.prenom}"/>
             </f:field>
-            <f:field property="password">
-                <g:passwordField name="password" value="${user.password}" />
+            <f:field property="username" label="Login" required="true">
+                <g:field type="text" name="username" value="${user.username}"/>
             </f:field>
-            <f:field property="dateNaissance">
+            <f:field property="password" label="Mot de passe" required="true">
+                <g:passwordField name="password" value="${user.password}"/>
+            </f:field>
+            <f:field property="dateNaissance" label="Date de naissance"  required="true">
                 <g:datePicker name="dateNai" value="${user.dateNai}" precision="day"/>
             </f:field>
             <f:field property="role">
                 <g:field type="text" name="role" value="${profil}" disabled=""/>
             </f:field>
+
         </fieldset>
         <fieldset class="buttons">
             <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
