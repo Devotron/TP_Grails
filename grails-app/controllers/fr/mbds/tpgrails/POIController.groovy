@@ -18,7 +18,7 @@ class POIController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond POI.list(params), model: [POICount: POI.count()]
+        [POIList: POI.list(params), POICount: POI.count()]
     }
 
     def show(POI POI) {
