@@ -53,13 +53,20 @@ class UserController {
     def create() {
         println("********************************")
         println("Create : ")
-        respond new User(params)
+
+        def rolesU = Role.getAll()
+
+        render view: 'create', model: [user: new User(params), roles: Role.getAll().sort {-it.id}]
+
+        //respond new User(params), model: []
     }
 
     @Transactional
     def save(User user) {
         println("********************************")
-        println("Save : (ID :{$user.id}, USERNAME : {$user.username}, ROLE : {$user.authorities.authority})")
+        println("Save : (ID :{$user.id}, USERNAME : {$user.username}")
+
+
         if (user == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -73,6 +80,7 @@ class UserController {
         }
 
         user.save flush:true
+        UserRole.create(user, Role.findById(params['roles.authority']), true)
 
         request.withFormat {
             form multipartForm {
