@@ -24,9 +24,9 @@ Comptes :
 ## Fonctionnalités implémentées
 
 * Gestion des utilisateurs :
-  - Accès au fonctionnalité du site dépendamment des droits utilisateurs
+  - Accès aus fonctionnalités du site dépendamment des droits utilisateurs
   - Modérateur peut modifier certaines informations des utilisateurs simples
-  - Admin peut modifier/créer des utilisateurs
+  - Admin peut modifier/ créer des utilisateurs
    
 * Profil utilisateur : 
   Un utilisateur a accès à une page de profil sur laquelle il peut effectuer des modifications
@@ -35,10 +35,14 @@ Comptes :
   
 * Upload et affichage des images pour les POIs et les groupes de POIs
 
-*  Sockage des images uploadées via les différents formulaires dans un serveur web Apache
+*  Stockage des images uploadées via les différents formulaires dans un serveur web Apache
 
    Configuré dans le fichier [application.groovy ](TP_Grails/grails-app/conf/application.groovy )
    
 ## Bonus
 
 Aucun bonus terminé pour l'instant.
+
+Commencé :
+* Upload d'images en drag’n’drop 
+* Map pour les POIs et les groupes
