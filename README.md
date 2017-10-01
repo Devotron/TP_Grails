@@ -3,6 +3,9 @@
 
 Projet réalisé par Michaël Gianfaldone et Estelle Rostan dans le cadre de l'enseignement "Serveur Grails" du master 2 MBDS.
 
+   Sujet : [TP (PDF) : Création d'une plateforme de gestion de points d'intérêts ](http://cours.tokidev.fr/mbds/grails/tp_grails.pdf )
+
+
 ## Informations
 
 - Base de donnée : H2 Database
@@ -14,10 +17,9 @@ Comptes :
 - Modérateur : modo@unice.fr, passm
 - Admin : admin@unice.fr, passa
 
-## Contraintes et besoins
+## Modèle de données en fonction des contraintes et besoins du TP
 
-[[https://github.com/Devotron/TP_Grails/blob/master/classes%20de%20l'application%20de%20gestion%20des%20POIs.png
-|alt=classes de l'application de gestion des POIs]]
+![classes de l'application de gestion des POIs](https://github.com/Devotron/TP_Grails/blob/master/classes%20de%20l'application%20de%20gestion%20des%20POIs.png)
 
 ## Fonctionnalités implémentées
 
