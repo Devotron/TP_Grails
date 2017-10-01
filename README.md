@@ -7,9 +7,9 @@ Projet réalisé par Michaël Gianfaldone et Estelle Rostan dans le cadre de l'e
 Base de donnée : H2 Database
 
 Comptes :
-Utilisateur simple : user@unice.fr, pass
-Modérateur : modo@unice.fr, passm
-Admin : admin@unice.fr, passa
+- Utilisateur simple : user@unice.fr, pass
+- Modérateur : modo@unice.fr, passm
+- Admin : admin@unice.fr, passa
 
 ## Fonctionnalités implémentées
 
