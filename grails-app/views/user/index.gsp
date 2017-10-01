@@ -24,7 +24,7 @@
             <g:if test="${flash.error}">
                 <div class="errors" role="status">${flash.error}</div>
             </g:if>
-            <f:table collection="${userList}" />
+            <f:table collection="${userList}" properties="['username', 'nom', 'prenom', 'accountLocked', 'accountExpired']" />
 
             <div class="pagination">
                 <g:paginate total="${userCount ?: 0}" />
