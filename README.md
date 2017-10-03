@@ -31,7 +31,7 @@ Comptes :
 * Profil utilisateur : 
   Un utilisateur a accès à une page de profil sur laquelle il peut effectuer des modifications
   
-* Création et édition de POIs et groupe de POIs où tous les attributs de ces derniers sont modifiables 
+* Création et édition de POIs et groupe de POIs où presque tous les attributs de ces derniers sont modifiables (ref : partie bug connus)
   
 * Upload et affichage des images pour les POIs et les groupes de POIs
 
@@ -39,9 +39,20 @@ Comptes :
 
    Configuré dans le fichier [application.groovy ](TP_Grails/grails-app/conf/application.groovy )
    
+## Bugs connus
+
+* L'ajout et modification de groupes de POIs ne se fait en passant par le POI
+* On ne peut pas supprimer les images depuis l'édition de POIs
+
+ [Voir les open issues ](https://github.com/Devotron/TP_Grails/labels/bug )
+ 
+## Améliorations possibles
+
+ [Voir les open issues ]( https://github.com/Devotron/TP_Grails/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement )
+   
 ## Bonus
 
-Aucun bonus terminé pour l'instant.
+      Aucun bonus terminé pour l'instant.
 
 Commencé :
 * Upload d'images en drag’n’drop 
