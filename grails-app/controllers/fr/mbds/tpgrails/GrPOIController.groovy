@@ -1,5 +1,8 @@
 package fr.mbds.tpgrails
 
+import org.springframework.web.multipart.MultipartFile
+import org.springframework.web.multipart.MultipartHttpServletRequest
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -10,6 +13,8 @@ class GrPOIController {
 
     static Boolean linkMe = true
     static String joliNom = "Groupes de POI"
+
+    def illustrationService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -75,6 +80,44 @@ class GrPOIController {
                 redirect grPOI
             }
             '*'{ respond grPOI, [status: OK] }
+        }
+    }
+
+    @Transactional
+    def updateCustom(GrPOI grPOI) {
+        if (grPOI == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (grPOI.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            respond grPOI.errors, view:'edit'
+            return
+        }
+
+        tryRequest(grPOI)
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'grPOI.label', default: 'GrPOI'), grPOI.id])
+                redirect grPOI
+            }
+            '*'{ respond grPOI, [status: OK] }
+        }
+    }
+
+    def private tryRequest(GrPOI grPOI) {
+        if (request instanceof MultipartHttpServletRequest) {
+            MultipartHttpServletRequest mpr = (MultipartHttpServletRequest) request;
+            MultipartFile file = (MultipartFile) mpr.getFile("file");
+
+            def filename = illustrationService.tryUpload(file)
+
+            if(filename != null) {
+                illustrationService.saveGrPOIIllustration(filename, grPOI)
+            }
         }
     }
 

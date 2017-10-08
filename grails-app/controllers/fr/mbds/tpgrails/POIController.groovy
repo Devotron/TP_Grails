@@ -125,10 +125,7 @@ class POIController {
             def filename = illustrationService.tryUpload(file)
 
             if(filename != null) {
-                illustrationService.saveIllustration(filename, poi)
-            }
-            else {
-                poi.save flush: true
+                illustrationService.savePOIIllustration(filename, poi)
             }
         }
     }
@@ -141,6 +138,8 @@ class POIController {
             notFound()
             return
         }
+
+//        POI.auteur.removeFrom(POI)
 
         // supprime le POI des associations avec les groupes de POI
         def grpois = POI.grpois
