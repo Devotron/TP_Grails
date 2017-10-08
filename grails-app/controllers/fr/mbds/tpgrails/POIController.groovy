@@ -22,7 +22,6 @@ class POIController {
     }
 
     def show(POI POI) {
-
         respond POI, model: [POIGeopos: POI.geopos]
     }
 
@@ -33,7 +32,7 @@ class POIController {
     def upload() {
         def poi = new POI(params)
 
-    tryRequest(poi)
+        tryRequest(poi)
 
         forward(action: "show", id: poi.id)
     }
@@ -64,6 +63,10 @@ class POIController {
     }
 
     def edit(POI POI) {
+        // edit les grPOIs associes
+        def  grpois = POI.grpois
+        grpois*.addToPois(POI)
+
         respond POI
     }
 
@@ -124,7 +127,7 @@ class POIController {
 
             def filename = illustrationService.tryUpload(file)
 
-            if(filename != null) {
+            if (filename != null) {
                 illustrationService.savePOIIllustration(filename, poi)
             }
         }
@@ -139,11 +142,12 @@ class POIController {
             return
         }
 
-//        POI.auteur.removeFrom(POI)
-
         // supprime le POI des associations avec les groupes de POI
         def grpois = POI.grpois
-        grpois*.removeFromPois(POI)
+        def tmp=[]
+        POI.grpois.each { tmp << it }
+        tmp.each { POI.removeFromGrpois(it) }
+        POI.delete()
 
         POI.delete flush: true
 
