@@ -11,23 +11,29 @@
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+                <li><g:link class="list" action="index"><g:message code="default.list.label.poi"/></g:link></li>
                 <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_MODERATEUR">
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+                <li><g:link class="create" action="create"><g:message code="default.new.label.poi"/></g:link></li>
                 </sec:ifAnyGranted>
             </ul>
         </div>
         <div id="show-POI" class="content scaffold-show" role="main">
-            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+            <h1>Détail du point d'interêt</h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
 
-            <f:display bean="POI" />
-
-            <g:render template="map"/>
-
+            <g:render template="showChampsPOI" model="[champs: champs]" />
             <g:render template="illustrations" model="[files: files]" />
+
+            <div id="map" style="height: 400px; width: 100%; display:inline-block; vertical-align:middle;"></div>
+
+            <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5g3lROuua5hCO4WwJSwDXEPqaogMawVU&callback=initMap">
+            </script>
+            <asset:javascript src="googlemap.js" />
+
+
             <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_MODERATEUR">
             <g:form resource="${this.POI}" method="DELETE">
                 <fieldset class="buttons">

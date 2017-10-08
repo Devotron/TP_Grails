@@ -1,22 +1,21 @@
-<script>
+
 function initMap() {
-
-    var latitude = document.getElementById('lat').value;
-    var longitude = document.getElementById('lon').value;
-
-    var pos = {lat: latitude, lng: longitude};AIzaSyBgsJCbKDGTcCxn7UfQrjxEI8bPyjpllZg
-
+    //poiLat, poiLng
+    //var APIKey = "AIzaSyC5g3lROuua5hCO4WwJSwDXEPqaogMawVU";
+    //var latitude = document.getElementById('lat').value;
+    //var longitude = document.getElementById('lon').value;
+    //
+    //var poi = {lat: poiLat, lng: poiLng};
+    var c = {lat:43.616700, lng: 7.063751};
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
-        center: pos
+        zoom: 15,
+        center: c
     });
-    var marker = new google.maps.Marker({
-        position: pos,
-        map: map
-    });
+
+    /*var marker = new google.maps.Marker({
+        map: map,
+        label: 'POI',
+        position: poi
+    });*/
 }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5g3lROuua5hCO4WwJSwDXEPqaogMawVU&callback=initMap"
-async defer>
-</script>
 

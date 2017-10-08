@@ -84,6 +84,7 @@ class UserService {
 
     }
 
+    
     def verificationTypeMAJ(User user) {
         def IDcourant = springSecurityService.currentUserId
         println("Utilisateur courant {$IDcourant}")
@@ -99,6 +100,7 @@ class UserService {
 
     }
 
+    //Vérification que le login d'un utilisateur est bien unique
     def loginUnique(User user) {
 
         def login = user.username
@@ -116,6 +118,7 @@ class UserService {
 
     }
 
+    //Recuperation du rôle d'un utilisateur
     def roleUtilisateur(User user) {
 
         return UserRole.findByUser(user).getRole().getAuthority()
