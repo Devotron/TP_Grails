@@ -36,7 +36,8 @@
                     <g:render template="illustrations" />
                 </fieldset>
                 <fieldset class="buttons">
-                    <g:actionSubmit action="updateCustom"  class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <g:actionSubmit action="updateCustom"  class="save" value="${message(code: 'default.button.updateImage.label', default: 'Update with image')}" />
                 </fieldset>
             </g:form>
         </div>
