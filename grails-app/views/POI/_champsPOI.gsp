@@ -6,6 +6,4 @@
         <f:field property="grpois" label="Groupes"></f:field>
         <f:field property="auteur"></f:field>
     </f:with>
-    <label>Image</label>
-    <input type="file" name="file" />
 </div>

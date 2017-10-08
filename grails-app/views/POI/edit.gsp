@@ -27,7 +27,7 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.POI}"  enctype="multipart/form-data" method="POST">
+            <g:form resource="${this.POI}" method="PUT">
                 <g:hiddenField name="version" value="${this.POI?.version}" />
                 <fieldset class="form">
                     <g:render template="champsPOI" model="[champs: champs]" />
@@ -35,9 +35,13 @@
                 <g:render template="illustrations" model="[files: files]" />
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-                    <g:actionSubmit action="updateCustom"  class="save" value="${message(code: 'default.button.updateImage.label', default: 'Update image')}" />
                 </fieldset>
             </g:form>
-        </div>
+            <g:form resource="${this.POI}"  enctype="multipart/form-data" method="POST">
+                <label>Rajouter une image</label>
+                <input type="file" name="file" />
+                <g:actionSubmit action="updateCustom"  class="save" value="${message(code: 'default.button.updateImage.label', default: 'Update image')}" />
+            </g:form>
+    </div>
     </body>
 </html>
