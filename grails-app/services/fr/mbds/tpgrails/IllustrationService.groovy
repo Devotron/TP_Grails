@@ -22,21 +22,29 @@ class IllustrationService {
         return filename
     }
 
-    def saveIllustration(def filename, POI poi = null, GrPOI grpoi = null) {
-        // initialisation
+    def savePOIIllustration(def filename, POI poi) {
         def illustration = new Illustration()
         illustration.nom = filename
-        illustration.poi = poi
 
-        // sauvegarder les objets
         if (poi != null) {
             poi.addToImages(illustration)
             poi.save flush: true
         }
+        else {
+            poi.save flush: true
+        }
+    }
 
-        if (grpoi != null) {
-            grpoi.addToImages(illustration)
-            grpoi.save flush: true
+    def saveGrPOIIllustration(def filename, GrPOI grPOI) {
+        def illustration = new Illustration()
+        illustration.nom = filename
+
+        if (grPOI != null) {
+            grPOI.addToImages(illustration)
+            grPOI.save flush: true
+        }
+        else {
+            grPOI.save flush: true
         }
     }
 }

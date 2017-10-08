@@ -27,14 +27,16 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.grPOI}" method="PUT">
+            <g:form resource="${this.grPOI}" enctype="multipart/form-data" method="POST">
                 <g:hiddenField name="version" value="${this.grPOI?.version}" />
                 <fieldset class="form">
                     <f:all bean="grPOI"/>
+                    <label>Rajouter une image </label>
+                    <input type="file" name="file" />
                     <g:render template="illustrations" />
                 </fieldset>
                 <fieldset class="buttons">
-                    <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <g:actionSubmit action="updateCustom"  class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>
             </g:form>
         </div>
